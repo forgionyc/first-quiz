@@ -1,15 +1,15 @@
 ################################################################################
 #     ____                          __     _                           ______
 #    / __ \  __  __  ___    _____  / /_   (_)  ____    ____           / ____/
-#   / / / / / / / / / _ \  / ___/ / __/  / /  / __ \  / __ \         /___ \  
-#  / /_/ / / /_/ / /  __/ (__  ) / /_   / /  / /_/ / / / / /        ____/ /  
-#  \___\_\ \__,_/  \___/ /____/  \__/  /_/   \____/ /_/ /_/        /_____/   
-#                                                                            
+#   / / / / / / / / / _ \  / ___/ / __/  / /  / __ \  / __ \         /___ \
+#  / /_/ / / /_/ / /  __/ (__  ) / /_   / /  / /_/ / / / / /        ____/ /
+#  \___\_\ \__,_/  \___/ /____/  \__/  /_/   \____/ /_/ /_/        /_____/
+#
 #  Question 5
 ################################################################################
 #
 # Instructions:
-# This questions continues to use the database we worked with in Question 4. In 
+# This questions continues to use the database we worked with in Question 4. In
 # this question, we will made some modifications ot the table.
 
 # Part 5.A:
@@ -20,17 +20,24 @@
 
 sql_create_favorite_foods = """
 
-Your SQL here.
+CREATE TABLE favorite_foods (
+        food_id INTEGER PRIMARY KEY,
+        name TEXT NOT NULL,
+        vegetarian INTEGER NOT NULL
+    );
 
 """
 
 # Part 5.B:
 # Alter the animals and people tables by adding a new column to each called 'favorite_food_id'
-# The test suite will verify the new changes by inserting some new rows. 
+# The test suite will verify the new changes by inserting some new rows.
 
 sql_alter_tables_with_favorite_food = """
 
-Your SQL here.
+ALTER TABLE animals
+ADD COLUMN favorite_food_id INTEGER;
+ALTER TABLE people
+ADD COLUMN favorite_food_id INTEGER;
 
 """
 
@@ -40,6 +47,9 @@ Your SQL here.
 
 sql_select_all_vegetarian_pets = """
 
-Your SQL here.
+SELECT a.name, f.name
+FROM animals a
+JOIN favorite_foods AS f ON a.favorite_food_id = f.food_id
+WHERE f.vegetarian = 1;
 
 """
